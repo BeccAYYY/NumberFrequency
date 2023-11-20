@@ -1,4 +1,4 @@
 interface NumberRecorder {
-    recordedNumbers : NumberRecord[];
+    recordedNumbers: ReadonlyArray<NumberRecord>;
     checkAndRecordNumber(numberToRecord: bigint) : boolean;
 }
