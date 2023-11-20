@@ -1,11 +1,11 @@
 class NumberRecord {
   value: bigint;
-  occurences: number;
+  occurrences: number;
   meetsCriteria: boolean;
 
-  constructor(data: {value: bigint, occurences: number, meetsCriteria: boolean}) {
+  constructor(data: {value: bigint, occurrences: number, meetsCriteria: boolean}) {
     this.value = data.value;
-    this.occurences = data.occurences;
+    this.occurrences = data.occurrences;
     this.meetsCriteria = data.meetsCriteria;
   }
 }

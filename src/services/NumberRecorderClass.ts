@@ -10,13 +10,13 @@ export class NumberRecorderClass implements NumberRecorder {
         const priorEntry = this.recordedNumbers.find((recordedNumber) => recordedNumber.value === numberToRecord)
 
         if (priorEntry) {
-            priorEntry.occurences++;
+            priorEntry.occurrences++;
             return priorEntry.meetsCriteria;
         }
 
         const newNumberRecord = new NumberRecord({ 
             value: numberToRecord, 
-            occurences: 1, 
+            occurrences: 1, 
             meetsCriteria: this.numberChecker.meetsCriteria(numberToRecord) 
         });
         this.recordedNumbers.push(newNumberRecord);
