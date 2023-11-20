@@ -1,4 +1,4 @@
-class NumberRecorder implements NumberRecorder {
+class NumberRecorderClass implements NumberRecorder {
     recordedNumbers: NumberRecord[] = [];
     checkAndRecordNumber(numberToRecord: bigint, numberChecker: NumberChecker) : boolean {
         const priorEntry = this.recordedNumbers.find((recordedNumber) => recordedNumber.value === numberToRecord)
