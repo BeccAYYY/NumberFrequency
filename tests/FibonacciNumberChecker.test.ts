@@ -1,8 +1,8 @@
-import { GeneratedListFibonacciChecker as FibonacciNumberChecker }  from '../src/fibonacci-checkers/GeneratedListFibonacciChecker';
+import { FibonacciChecker }  from '../src/services/FibonacciChecker';
 
 describe('FibonacciNumberChecker', () => {
   test('should correctly check if a number is a Fibonacci number', () => {
-    const fibonacciChecker = new FibonacciNumberChecker();
+    const fibonacciChecker = new FibonacciChecker();
 
     // Fibonacci numbers
     expect(fibonacciChecker.meetsCriteria(0n)).toBe(true);
@@ -27,7 +27,7 @@ describe('FibonacciNumberChecker', () => {
   });
 
   test('should return false for negative numbers', () => {
-    const fibonacciChecker = new FibonacciNumberChecker();
+    const fibonacciChecker = new FibonacciChecker();
     expect(fibonacciChecker.meetsCriteria(-5n)).toBe(false);
   });
 });

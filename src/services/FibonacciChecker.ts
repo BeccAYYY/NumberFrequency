@@ -1,4 +1,4 @@
-export class GeneratedListFibonacciChecker implements NumberChecker {
+export class FibonacciChecker implements NumberChecker {
     private fibonacciList: bigint[] = this.generateFibonacciList(1000);
 
     meetsCriteria(numberToCheck: bigint): boolean {

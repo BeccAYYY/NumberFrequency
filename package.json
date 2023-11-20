@@ -14,7 +14,7 @@
     "ts-node": "^10.9.1"
   },
   "scripts": {
-    "build-and-run": "tsc && node ./dist/index.js",
+    "build-and-run": "tsc && node ./dist/src/index.js",
     "test": "jest"
   }
 }

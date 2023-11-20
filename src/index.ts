@@ -1,8 +1,4 @@
-import { RecursiveFibonacciChecker } from './fibonacci-checkers/RecursiveFibonacciChecker';
-import { LoopFibonacciChecker } from './fibonacci-checkers/LoopFibonacciChecker';
-import { QuadraticFibonacciChecker } from './fibonacci-checkers/QuadraticFibonacciChecker';
-import { GeneratedListFibonacciChecker } from './fibonacci-checkers/GeneratedListFibonacciChecker';
-import { TextListFibonacciChecker } from './fibonacci-checkers/TextListFibonacciChecker';
+import { FibonacciChecker } from './services/FibonacciChecker';
 
 
 class PerformanceTest {
@@ -36,15 +32,6 @@ class PerformanceTest {
   
 
   const performanceTest = new PerformanceTest();
+  const generatedListChecker = new FibonacciChecker();
 
-  const recursiveChecker = new RecursiveFibonacciChecker();
-  const loopChecker = new LoopFibonacciChecker();
-  const quadraticChecker = new QuadraticFibonacciChecker();
-  const generatedListChecker = new GeneratedListFibonacciChecker();
-  const textListChecker = new TextListFibonacciChecker();
-  
-  performanceTest.runTest(recursiveChecker, 'Recursive Fibonacci Checker');
-  performanceTest.runTest(loopChecker, 'Loop Fibonacci Checker');
-  performanceTest.runTest(quadraticChecker, 'Quadratic Fibonacci Checker');
   performanceTest.runTest(generatedListChecker, 'Generated List Fibonacci Checker');
-  performanceTest.runTest(textListChecker, 'Text List Fibonacci Checker');
