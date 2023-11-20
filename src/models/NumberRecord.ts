@@ -1,4 +1,4 @@
-class NumberRecord {
+export class NumberRecord {
   value: bigint;
   occurrences: number;
   meetsCriteria: boolean;

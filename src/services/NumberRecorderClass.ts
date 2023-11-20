@@ -1,3 +1,5 @@
+import { NumberRecord } from '../models/NumberRecord'
+
 export class NumberRecorderClass implements NumberRecorder {
     private _recordedNumbers: NumberRecord[] = [];
     private numberChecker: NumberChecker;
