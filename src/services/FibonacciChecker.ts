@@ -1,11 +1,11 @@
 export class FibonacciChecker implements NumberChecker {
-    private fibonacciList: bigint[] = this.generateFibonacciList(1000);
+    private fibonacciSet: Set<bigint> = this.generateFibonacciSet(1000);
 
     meetsCriteria(numberToCheck: bigint): boolean {
-        return this.fibonacciList.includes(numberToCheck);
+        return this.fibonacciSet.has(numberToCheck);
     }
 
-    private generateFibonacciList(count: number): bigint[] {
+    private generateFibonacciSet(count: number): Set<bigint> {
         const fibonacciList: bigint[] = [0n, 1n];
 
         for (let i = 2; i < count; i++) {
@@ -13,6 +13,7 @@ export class FibonacciChecker implements NumberChecker {
             fibonacciList.push(nextFibonacci);
         }
 
-        return fibonacciList;
+        const fibonacciSet: Set<bigint> = new Set(fibonacciList)
+        return fibonacciSet;
     }
-}
+} 
