@@ -1,7 +1,7 @@
 import { NumberRecord } from "models/NumberRecord";
 import { OutputFormatter } from "../interfaces/OutputFormatter";
 
-class DescendingOutputFormatter implements OutputFormatter {
+export class DescendingOutputFormatter implements OutputFormatter {
     format(recordedNumbers: ReadonlyArray<NumberRecord>): string {
         const sortedRecords = [...recordedNumbers].sort(
             (a, b) => b.occurrences - a.occurrences
