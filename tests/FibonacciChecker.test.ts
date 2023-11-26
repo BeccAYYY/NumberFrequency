@@ -20,6 +20,10 @@ describe('FibonacciChecker', () => {
     expect(fibonacciChecker.meetsCriteria(10n)).toBe(false);
     expect(fibonacciChecker.meetsCriteria(15n)).toBe(false);
     expect(fibonacciChecker.meetsCriteria(20n)).toBe(false);
+    expect(fibonacciChecker.meetsCriteria(20n)).toBe(false);
+    expect(fibonacciChecker.meetsCriteria(-20n)).toBe(false);
+    expect(fibonacciChecker.meetsCriteria(-123456789012345678901234567890n)).toBe(false);
+    expect(fibonacciChecker.meetsCriteria(-1n)).toBe(false);
     expect(fibonacciChecker.meetsCriteria(26863810024485359386146727202142923967616609318986952340123175997617981700247881689338369654483356564191827856161443356312976673642210350324634850410377680367334151172899169723197082763985615764450078474174625n)).toBe(false);
 
     // The 1001st fibonacci number

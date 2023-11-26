@@ -14,6 +14,8 @@ export class NumberRecorderClass implements NumberRecorder {
     }
 
     checkAndRecordNumber(numberToRecord: bigint): boolean {
+        //Check if that same entry has already been made.
+        //Saves having to run the fibonacci checker again, and bumps the occurrences.
         const priorEntry = this._recordedNumbers.find((recordedNumber) => recordedNumber.value === numberToRecord);
 
         if (priorEntry) {

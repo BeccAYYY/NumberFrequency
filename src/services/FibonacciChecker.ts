@@ -1,3 +1,5 @@
+//Creates a Set of the first 1000 fibonacci numbers for comparison.
+//Found this faster than mathematical approaches or reading from a text-file list.
 export class FibonacciChecker implements NumberChecker {
     private fibonacciSet: Set<bigint> = this.generateFibonacciSet(1000);
 

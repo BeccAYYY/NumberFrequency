@@ -4,6 +4,8 @@ import { Timer } from './Timer';
 import { DescendingOutputFormatter } from './DescendingOutputFormatter';
 import { EventEmitter } from 'events';
 
+//A single point of entry for the UI to interact with
+//Uses events to communicate outputs to the front end.
 export class ClientService {
     fibonacciChecker = new FibonacciChecker()
     numberRecorder = new NumberRecorderClass(this.fibonacciChecker)
