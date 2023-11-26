@@ -16,12 +16,30 @@ export class ClientService {
     }
 
     handleInput(userInput: any) {
-        const nonNullUserInput = userInput == null ? '' : userInput;
-        this.checkAndPrintResult(nonNullUserInput);
+        const trimmedInput = userInput.trim()
+        if (trimmedInput.length === 0) {
+            this.eventEmitter.emit('output', 'Your input was empty.');
+            return;
+        }
+        switch (trimmedInput) {
+            case 'halt':
+                console.log('halt');
+                return;
+            case 'resume':
+                console.log('resume');
+                return;
+            case 'quit':
+                console.log('quit');
+                return;
+        }
+        if (!this.isValidBigInt(trimmedInput)) {
+            this.eventEmitter.emit('output', 'Invalid input. Please enter a number.')
+            return;
+        }
+        this.checkAndPrintResult(trimmedInput);
     }
 
     startTimer(seconds: number) {
-        console.log('started');
         this.timer = new Timer(seconds, this.eventEmitter, () => {
             this.eventEmitter.emit('output', this.outputFormatter.format(this.numberRecorder.recordedNumbers));
         })
@@ -34,4 +52,18 @@ export class ClientService {
             this.eventEmitter.emit('output', 'FIB!');
         }
     };
+
+    private isValidBigInt(input: string): boolean {
+        const isNumeric = /^\d+$/.test(input);
+      
+        if (isNumeric) {
+          try {
+            const valueAsBigInt = BigInt(input);
+            return true;
+          } catch (error) {
+            return false;
+          }
+        }
+        return false;
+      }
 }
