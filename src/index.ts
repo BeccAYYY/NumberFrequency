@@ -1,39 +1,20 @@
-import { FibonacciChecker } from './services/FibonacciChecker';
-import { NumberRecorderClass } from './services/NumberRecorderClass';
-import { Timer } from './services/Timer';
-import { DescendingOutputFormatter } from './services/DescendingOutputFormatter';
-
+import { ClientService } from './services/ClientService';
+import { EventEmitter } from 'events';
 
 const prompt = require('prompt-sync')();
+const eventEmitter = new EventEmitter();
 
-const fibonacciChecker = new FibonacciChecker();
-const numberRecorder = new NumberRecorderClass(fibonacciChecker)
+const clientService = new ClientService(eventEmitter);
 const timerDuration = prompt("Please input the amount of time in seconds between emitting numbers and their frequency: ");
-
-const outputFormatter = new DescendingOutputFormatter();
-
-const timer = new Timer(timerDuration, () => {
-  console.log(outputFormatter.format(numberRecorder.recordedNumbers));
-})
-
-timer.start();
+clientService.startTimer(timerDuration);
 
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
 });
 
-readline.on('line', (input: any) => onInput(input))
+readline.on('line', (input: any) => clientService.handleInput(input))
 
-function onInput(userInput : any) {
-  const nonNullUserInput = userInput == null ? '' : userInput;
-  checkAndPrintResult(nonNullUserInput);
-}
-
-function checkAndPrintResult(input: string): void {
-  const bigIntput = BigInt(input);
-
-  if (numberRecorder.checkAndRecordNumber(bigIntput)) {
-    console.log("FIB!");
-  }
-};
+eventEmitter.on('output', (data: any) => {
+  console.log(data);
+});
