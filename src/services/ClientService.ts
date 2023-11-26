@@ -18,7 +18,7 @@ export class ClientService {
     handleInput(userInput: any) {
         const trimmedInput = userInput.trim()
         if (trimmedInput.length === 0) {
-            this.eventEmitter.emit('output', 'Your input was empty.');
+            this.eventEmitter.emit('output', 'Your input was empty. Please try again.');
             return;
         }
         switch (trimmedInput) {
@@ -29,8 +29,10 @@ export class ClientService {
                 this.timer.resume();
                 return;
             case 'quit':
-                console.log('quit');
-                return;
+                this.timer.pause();
+                this.eventEmitter.emit('output', this.outputFormatter.format(this.numberRecorder.recordedNumbers));
+                this.eventEmitter.emit('output', 'Thanks for playing.')
+                process.exit(0)
         }
         if (!this.isValidBigInt(trimmedInput)) {
             this.eventEmitter.emit('output', 'Invalid input. Please enter a number.')
@@ -40,6 +42,9 @@ export class ClientService {
     }
 
     startTimer(seconds: number) {
+        if (this.timer !== null) {
+            throw new Error('Timer already started');
+        }
         this.timer = new Timer(seconds, this.eventEmitter, () => {
             this.eventEmitter.emit('output', this.outputFormatter.format(this.numberRecorder.recordedNumbers));
         })
@@ -55,15 +60,15 @@ export class ClientService {
 
     private isValidBigInt(input: string): boolean {
         const isNumeric = /^\d+$/.test(input);
-      
+
         if (isNumeric) {
-          try {
-            const valueAsBigInt = BigInt(input);
-            return true;
-          } catch (error) {
-            return false;
-          }
+            try {
+                const valueAsBigInt = BigInt(input);
+                return true;
+            } catch (error) {
+                return false;
+            }
         }
         return false;
-      }
+    }
 }
