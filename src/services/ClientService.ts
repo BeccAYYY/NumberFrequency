@@ -59,7 +59,7 @@ export class ClientService {
     };
 
     private isValidBigInt(input: string): boolean {
-        const isNumeric = /^\d+$/.test(input);
+        const isNumeric = /^-?\d+$/.test(input);
 
         if (isNumeric) {
             try {
