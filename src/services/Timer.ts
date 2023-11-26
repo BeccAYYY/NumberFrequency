@@ -1,16 +1,26 @@
-class Timer {
+import { EventEmitter } from 'events';
+
+export class Timer {
     private duration: number;
     private timerId: NodeJS.Timeout | null = null;
     private callback: Function;
     private remainingTime: number = 0;
     private startTime: number = 0;
+    private eventEmitter: EventEmitter;
 
-    constructor(seconds: number, callback: Function) {
+    constructor(seconds: number, eventEmitter: EventEmitter, callback: Function) {
         this.duration = seconds * 1000;
+        this.eventEmitter = eventEmitter;
         this.callback = callback;
     }
 
     start() {
+        if (this.startTime !== 0) {
+            throw new Error("Timer is already running.");
+        }
+        this.startTimer();
+    }
+    private startTimer() {
         this.remainingTime = this.duration;
         this.timerId = setInterval(() => {
             this.callback();
@@ -22,9 +32,9 @@ class Timer {
         if (this.timerId !== null) {
             this.remainingTime = this.remainingTime - (Date.now() - this.startTime);
             clearTimeout(this.timerId)
+            this.timerId = null;
         } else {
-            //TODO: Move this out of the timer class
-            console.log("Timer is already paused. type \"resume\" to recommence.");
+            this.eventEmitter.emit('output', "Timer is already paused. Type \"resume\" to recommence.");
         }
     }
 
@@ -33,11 +43,10 @@ class Timer {
             this.startTime = Date.now();
             this.timerId = setTimeout(() => {
                 this.callback();
-                this.start();
+                this.startTimer();
             }, this.remainingTime)
         } else {
-            //TODO: Move this out of the timer class
-            console.log("Timer is already running. type \"halt\" to pause.");
+            this.eventEmitter.emit('output', "Timer is already running. Type \"halt\" to pause.");
         }
 
     }

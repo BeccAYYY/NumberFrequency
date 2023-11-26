@@ -23,10 +23,10 @@ export class ClientService {
         }
         switch (trimmedInput) {
             case 'halt':
-                console.log('halt');
+                this.timer.pause()
                 return;
             case 'resume':
-                console.log('resume');
+                this.timer.resume();
                 return;
             case 'quit':
                 console.log('quit');
