@@ -22,6 +22,7 @@ The company name and requirements have been left out in order to prevent it from
 ### Prerequisites
 
 - Node.js (^20.9.2)
+- npm (^10.1.0)
 
 ### Installation
 
